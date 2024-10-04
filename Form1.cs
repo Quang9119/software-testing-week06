@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Buoi07_TinhToan3.FixBug_Quang_;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -36,8 +37,36 @@ namespace Buoi07_TinhToan3
         {
             //lấy giá trị của 2 ô số
             double so1, so2, kq = 0;
-            so1 = double.Parse(txtSo1.Text);
-            so2 = double.Parse(txtSo2.Text);
+            TextBox invalidTextBox;
+            if (!FixInputValidator.ValidateInput(txtSo1, txtSo2, out invalidTextBox))
+            {
+                // Đặt focus và chọn toàn bộ nội dung của ô nhập bị lỗi
+                invalidTextBox.Focus();
+                invalidTextBox.SelectAll();
+                return;
+            }
+            if (FixInputValidator.IsFraction(txtSo1.Text))
+            {
+                // Chuyển đổi phân số từ chuỗi sang kiểu double
+                so1 = FixInputValidator.ConvertFractionToDouble(txtSo1.Text);
+            }
+            else
+            {
+                // Chuyển đổi trực tiếp nếu không phải phân số
+                so1 = double.Parse(txtSo1.Text);
+            }
+
+            // Kiểm tra nếu nhập là phân số cho txtSo2
+            if (FixInputValidator.IsFraction(txtSo2.Text))
+            {
+                // Chuyển đổi phân số từ chuỗi sang kiểu double
+                so2 = FixInputValidator.ConvertFractionToDouble(txtSo2.Text);
+            }
+            else
+            {
+                // Chuyển đổi trực tiếp nếu không phải phân số
+                so2 = double.Parse(txtSo2.Text);
+            }
             //Thực hiện phép tính dựa vào phép toán được chọn
             if (radCong.Checked) kq = so1 + so2;
             else if (radTru.Checked) kq = so1 - so2;
