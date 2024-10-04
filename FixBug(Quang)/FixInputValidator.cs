@@ -11,6 +11,7 @@ namespace Buoi07_TinhToan3.FixBug_Quang_
     {
         public static bool ValidateInput(TextBox txtSo1, TextBox txtSo2, out TextBox invalidTextBox)
         {
+            //kiem tra co chua dau ,
             if (txtSo1.Text.Contains(","))
             {
                 invalidTextBox = txtSo1;
