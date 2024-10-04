@@ -75,5 +75,25 @@ namespace Buoi07_TinhToan3
             //Hiển thị kết quả lên trên ô kết quả
             txtKq.Text = kq.ToString();
         }
+
+        private void txtSo1_Leave(object sender, EventArgs e)
+        {
+            checkInputValidation(txtSo1);
+        }
+
+        private void txtSo2_Leave(object sender, EventArgs e)
+        {
+            checkInputValidation(txtSo1);
+        }
+
+        private void checkInputValidation(TextBox textBox)
+        {
+            string inputText = textBox.Text;
+            if (string.IsNullOrWhiteSpace(inputText) || !double.TryParse(inputText, out _))
+            {
+                MessageBox.Show("Vui lòng nhập giá trị phù hợp!");
+                textBox.Focus();
+            }
+        }
     }
 }
