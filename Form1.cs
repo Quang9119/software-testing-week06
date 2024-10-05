@@ -71,7 +71,19 @@ namespace Buoi07_TinhToan3
             if (radCong.Checked) kq = so1 + so2;
             else if (radTru.Checked) kq = so1 - so2;
             else if (radNhan.Checked) kq = so1 * so2;
-            else if (radChia.Checked && so2 != 0) kq = so1 / so2;
+            else if (radChia.Checked)
+            {
+                if (so2 == 0)
+                {
+                    MessageBox.Show("Lỗi: Không thể chia cho số 0!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtSo2.Focus();
+                    return; // Ngừng thực hiện nếu chia cho 0
+                }
+                else
+                {
+                    kq = so1 / so2;
+                }
+            }
             //Hiển thị kết quả lên trên ô kết quả
             txtKq.Text = kq.ToString();
         }
@@ -95,5 +107,6 @@ namespace Buoi07_TinhToan3
                 textBox.Focus();
             }
         }
+
     }
 }
